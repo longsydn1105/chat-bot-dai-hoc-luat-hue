@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HUL Chatbot AI - Đại Học Luật Huế</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              law: {
+                red: "#A52A1F",
+                gold: "#FFD700",
+                dark: "#781d18",
+                bg: "#F9FAFB",
+              },
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              serif: ["Merriweather", "serif"],
+            },
+            animation: {
+              "fade-in-up": "fadeInUp 0.3s ease-out forwards",
+            },
+            keyframes: {
+              fadeInUp: {
+                "0%": { opacity: "0", transform: "translateY(10px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: rgba(165, 42, 31, 0.2);
+        border-radius: 20px;
+      }
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="bg-law-bg font-sans h-screen overflow-hidden flex text-gray-800">
+    <aside
+      class="hidden md:flex flex-col w-80 bg-law-red text-white shadow-2xl z-20 relative"
+    >
+      <div
+        class="p-6 border-b border-white/10 flex items-center gap-3 bg-black/10"
+      >
+        <div class="bg-white p-2 rounded-full shadow-lg">
+          <i data-lucide="school" class="text-law-red w-6 h-6"></i>
+        </div>
+        <div>
+          <h1 class="font-serif font-bold text-lg tracking-wide text-law-gold">
+            HUL AI Support
+          </h1>
+          <p class="text-xs text-white/80 flex items-center gap-1">
+            <span
+              class="w-2 h-2 rounded-full bg-green-400 animate-pulse"
+            ></span>
+            Trực tuyến
+          </p>
+        </div>
+      </div>
+
+      <div class="flex-1 overflow-y-auto p-4 custom-scrollbar">
+        <div class="mb-6">
+          <h2
+            class="text-xs uppercase text-white/60 font-semibold mb-3 tracking-wider flex items-center gap-2"
+          >
+            <i data-lucide="sparkles" class="w-3 h-3 text-law-gold"></i>
+            Tính năng
+          </h2>
+          <button
+            onclick="toggleModal(true)"
+            class="w-full p-4 rounded-xl bg-gradient-to-r from-law-dark to-law-red border border-white/10 hover:border-law-gold/50 transition-all shadow-lg group text-left relative overflow-hidden"
+          >
+            <div class="flex items-center gap-3 mb-2 relative z-10">
+              <div class="bg-white/10 p-2 rounded-lg">
+                <i
+                  data-lucide="brain-circuit"
+                  class="text-law-gold w-6 h-6"
+                ></i>
+              </div>
+              <div>
+                <span class="block font-bold text-sm text-white"
+                  >Góc Tư vấn 1:1</span
+                >
+                <span class="text-[10px] text-white/70"
+                  >AI phân tích tính cách</span
+                >
+              </div>
+            </div>
+            <div class="text-[10px] text-law-gold pl-1 italic relative z-10">
+              "Mình hợp ngành nào nhỉ?" ✨
+            </div>
+          </button>
+        </div>
+
+        <div class="mb-6">
+          <h2
+            class="text-xs uppercase text-white/60 font-semibold mb-3 tracking-wider"
+          >
+            Câu hỏi phổ biến
+          </h2>
+          <div class="space-y-2" id="sidebar-suggestions"></div>
+        </div>
+      </div>
+
+      <div
+        class="p-4 bg-black/20 text-center text-[10px] text-white/50 border-t border-white/10"
+      >
+        © 2025 Hue University of Law
+      </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-full relative bg-white md:bg-law-bg">
+      <header
+        class="md:hidden bg-law-red text-white p-4 flex justify-between items-center shadow-lg z-10"
+      >
+        <div class="flex items-center gap-2">
+          <div class="bg-white p-1.5 rounded-full">
+            <i data-lucide="school" class="text-law-red w-5 h-5"></i>
+          </div>
+          <span class="font-bold font-serif text-law-gold">HUL AI</span>
+        </div>
+      </header>
+
+      <div
+        id="chat-container"
+        class="flex-1 overflow-y-auto p-4 md:p-8 scroll-smooth"
+      >
+        <div class="max-w-3xl mx-auto space-y-6" id="messages-list">
+          <div class="flex w-full justify-start animate-fade-in-up">
+            <div class="flex max-w-[85%] md:max-w-[75%] flex-row">
+              <div
+                class="flex-shrink-0 h-10 w-10 rounded-full flex items-center justify-center bg-gradient-to-br from-law-red to-law-dark text-white shadow-lg mx-2 border-2 border-white"
+              >
+                <i data-lucide="school" class="w-5 h-5"></i>
+              </div>
+              <div
+                class="relative p-4 rounded-2xl shadow-sm text-sm md:text-base leading-relaxed bg-white text-gray-800 border border-gray-200 rounded-tl-none"
+              >
+                <div
+                  class="absolute -top-3 left-0 bg-gradient-to-r from-law-gold to-yellow-300 text-law-red text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm border border-white"
+                >
+                  <i data-lucide="sparkles" class="w-3 h-3"></i> AI Support
+                </div>
+                <p>
+                  Xin chào! Tôi là Trợ lý ảo AI của
+                  <b>Đại học Luật Huế (HUL)</b>. 🏛️<br />Tôi có thể giải đáp
+                  thắc mắc hoặc tư vấn chọn ngành cho bạn.
+                </p>
+                <div
+                  class="text-[10px] mt-2 text-gray-400 text-right font-medium"
+                  id="time-init"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          id="typing-indicator"
+          class="hidden w-full justify-start mt-4 max-w-3xl mx-auto pl-14"
+        >
+          <div
+            class="bg-white p-3 rounded-2xl rounded-tl-none border border-gray-100 shadow-sm inline-flex items-center gap-2"
+          >
+            <i
+              data-lucide="loader-2"
+              class="animate-spin text-law-red w-4 h-4"
+            ></i>
+            <span class="text-xs text-gray-500 font-medium"
+              >AI đang suy nghĩ...</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="p-4 bg-white border-t border-gray-200 shadow-[0_-5px_20px_rgba(0,0,0,0.03)] z-10"
+      >
+        <div class="max-w-3xl mx-auto">
+          <div
+            class="flex gap-2 overflow-x-auto pb-4 mb-1 hide-scrollbar"
+            id="quick-suggestions"
+          ></div>
+
+          <form
+            id="chat-form"
+            class="relative flex items-center shadow-sm rounded-2xl border border-gray-300 focus-within:ring-2 focus-within:ring-law-red/50 focus-within:border-law-red bg-gray-50 transition-all"
+          >
+            <input
+              type="text"
+              id="user-input"
+              autocomplete="off"
+              placeholder="Nhập câu hỏi cho HUL Chatbot..."
+              class="flex-1 py-4 px-5 bg-transparent outline-none text-gray-700 placeholder-gray-400"
+            />
+
+            <button
+              type="submit"
+              id="btn-send"
+              class="p-2 mr-2 rounded-xl transition-all flex items-center justify-center w-10 h-10 bg-gray-200 text-gray-400 hover:bg-law-red hover:text-white cursor-pointer"
+            >
+              <i data-lucide="send" class="w-5 h-5"></i>
+            </button>
+          </form>
+
+          <div
+            class="text-center mt-3 flex justify-center items-center gap-1.5 opacity-60"
+          >
+            <i data-lucide="info" class="w-3 h-3 text-law-red"></i>
+            <p class="text-[10px] text-gray-500 font-medium">
+              Thông tin mang tính chất tham khảo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div
+      id="advisor-modal"
+      class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center p-4 backdrop-blur-sm transition-all duration-300"
+    >
+      <div
+        class="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh] animate-fade-in-up"
+      >
+        <div
+          class="bg-law-red p-5 text-white flex justify-between items-start border-b-4 border-law-gold"
+        >
+          <div>
+            <h3
+              class="text-xl font-serif font-bold flex items-center gap-2 text-law-gold"
+            >
+              <i data-lucide="brain-circuit" class="w-6 h-6"></i>
+              Tư vấn Hướng nghiệp
+            </h3>
+          </div>
+          <button
+            onclick="toggleModal(false)"
+            class="text-white/70 hover:text-white p-1"
+          >
+            <i data-lucide="x" class="w-6 h-6"></i>
+          </button>
+        </div>
+
+        <div class="p-6 overflow-y-auto custom-scrollbar">
+          <div id="advisor-form">
+            <label class="block text-sm font-semibold text-gray-700 mb-2"
+              >Mô tả về bản thân:</label
+            >
+            <textarea
+              id="advisor-input"
+              class="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-law-red/50 outline-none min-h-[120px] text-sm bg-gray-50 resize-none"
+              placeholder="Ví dụ: Em thích tranh luận, tư duy logic..."
+            ></textarea>
+            <div class="flex gap-3 justify-end pt-4">
+              <button
+                onclick="toggleModal(false)"
+                class="px-4 py-2 text-gray-600 font-medium text-sm hover:bg-gray-100 rounded-lg"
+              >
+                Huỷ
+              </button>
+              <button
+                onclick="handleAdvisorSubmit()"
+                class="px-6 py-2 rounded-lg font-bold text-white bg-law-red hover:bg-law-dark shadow-md flex items-center gap-2"
+              >
+                <i data-lucide="sparkles" class="w-4 h-4 text-law-gold"></i>
+                Phân tích
+              </button>
+            </div>
+          </div>
+
+          <div id="advisor-result" class="hidden">
+            <div
+              class="flex items-center gap-2 mb-4 text-green-800 bg-green-50 p-3 rounded-lg border border-green-200"
+            >
+              <i
+                data-lucide="check-circle-2"
+                class="w-5 h-5 text-green-600"
+              ></i>
+              <span class="font-bold text-sm">Kết quả từ AI:</span>
+            </div>
+            <div
+              id="advisor-content"
+              class="prose prose-sm max-w-none text-gray-800 leading-relaxed whitespace-pre-wrap"
+            ></div>
+            <div class="mt-6 flex justify-center">
+              <button
+                onclick="resetAdvisor()"
+                class="text-law-red font-semibold text-sm flex items-center gap-1 hover:underline"
+              >
+                <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Tư vấn lại
+              </button>
+            </div>
+          </div>
+
+          <div
+            id="advisor-loading"
+            class="hidden py-8 flex-col items-center justify-center text-center"
+          >
+            <i
+              data-lucide="loader-2"
+              class="animate-spin text-law-red w-10 h-10 mb-3"
+            ></i>
+            <p class="text-sm text-gray-500 font-medium">Đang suy nghĩ...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 1. CƠ SỞ DỮ LIỆU CÂU TRẢ LỜI (KNOWLEDGE BASE)
+      // Đây là não của con bot, ông muốn nó khôn hơn thì cứ thêm từ khóa vào đây
+      const BOT_BRAIN = [
+        {
+          keywords: ["ngành", "đào tạo", "có gì", "học gì"],
+          answer:
+            "Hiện tại Trường Đại học Luật (HUL) đang đào tạo các ngành mũi nhọn sau:\n\n1. ⚖️ **Luật học**\n2. 💼 **Luật Kinh tế**\n3. 🌍 **Luật Quốc tế**\n4. 🏛️ **Luật Hành chính**\n5. 🔨 **Luật Hình sự**\n6. 📝 **Luật Dân sự**\n\nBạn quan tâm cụ thể ngành nào không?",
+        },
+        {
+          keywords: ["địa chỉ", "ở đâu", "vị trí", "đến trường"],
+          answer:
+            "📍 **Trụ sở chính:** Đường Võ Văn Kiệt, Phường An Tây, TP. Huế.\n\nTrường nằm ở khu quy hoạch mới, không gian cực kỳ rộng rãi và thoáng mát, tha hồ check-in sống ảo nhé! 📸",
+        },
+        {
+          keywords: ["học phí", "tiền học", "đắt không"],
+          answer:
+            "💰 **Về học phí:** HUL áp dụng mức học phí theo quy định của Nhà nước đối với trường đại học công lập.\n\nMức thu sẽ thay đổi tùy theo số tín chỉ bạn đăng ký mỗi kỳ. Để biết con số chính xác nhất cho năm học này, bạn hãy ghé website phòng Tài chính nhé! 💸",
+        },
+        {
+          keywords: ["việc làm", "ra trường", "lương", "nghề nghiệp", "làm gì", "cơ hội"],
+          answer:
+            "Yên tâm nhé! Cử nhân Luật HUL có cơ hội việc làm rất rộng mở: \n- Làm việc tại Tòa án, Viện kiểm sát 🏛️\n- Pháp chế doanh nghiệp 💼\n- Công chứng viên, Luật sư 👨‍⚖️\n- Giảng viên, Nghiên cứu viên 📚\n\nĐặc biệt ngành Luật Kinh tế đang rất 'hot' đó!",
+        },
+        {
+          keywords: ["liên hệ", "sđt", "hotline", "email"],
+          answer:
+            "📞 **Thông tin liên hệ:**\n- Hotline tuyển sinh: 0234.xxxx.xxx\n- Website: hul.hueuni.edu.vn\n- Fanpage: Đại học Luật Huế\n\nAdmin trực page 24/7 (trừ lúc ngủ) nhé! 😄",
+        },
+        {
+          keywords: ["xin chào", "hi", "hello", "chào"],
+          answer:
+            "Chào bạn! 👋 Tôi là Trợ lý ảo AI của Đại học Luật Huế.\nTôi có thể giúp bạn tra cứu thông tin tuyển sinh, ngành học... Bạn cần giúp gì nào? ^^",
+        },
+      ];
+
+      // Câu trả lời mặc định khi không hiểu
+      const FALLBACK_MSG =
+        "Xin lỗi, hiện tại tôi đang chạy ở chế độ thử nghiệm nên chưa thể trả lời câu hỏi phức tạp này. 😅\n\n👉 **Bạn vui lòng chọn các câu hỏi gợi ý có sẵn bên dưới/bên trái để tôi phục vụ tốt nhất nhé!**";
+
+      // Danh sách gợi ý hiển thị
+      const suggestions = [
+        "HUL có những ngành nào?",
+        "Học Luật ra làm gì?",
+        "Địa chỉ trường ở đâu?",
+        "Học phí thế nào?",
+        "Liên hệ với trường",
+      ];
+
+      // 2. CÁC HÀM XỬ LÝ UI (GIỮ NGUYÊN)
+      window.toggleModal = (show) => {
+        const modal = document.getElementById("advisor-modal");
+        modal.classList.toggle("hidden", !show);
+        modal.classList.toggle("flex", show);
+      };
+
+      window.setInput = (text) =>
+        (document.getElementById("user-input").value = text);
+
+      window.resetAdvisor = () => {
+        document.getElementById("advisor-result").classList.add("hidden");
+        document.getElementById("advisor-form").classList.remove("hidden");
+        document.getElementById("advisor-input").value = "";
+      };
+
+      // 3. XỬ LÝ CHAT CHÍNH
+      const chatForm = document.getElementById("chat-form"); // Đảm bảo trong HTML thẻ form có id="chat-form"
+      if (chatForm) {
+        chatForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          await handleSend();
+        });
+      }
+
+      async function handleSend() {
+        const inputEl = document.getElementById("user-input");
+        const text = inputEl.value.trim();
+        if (!text) return;
+
+        // Xóa input & Hiện tin nhắn User
+        inputEl.value = "";
+        appendMessage(text, "user");
+
+        // Hiệu ứng Typing
+        const typingEl = document.getElementById("typing-indicator");
+        typingEl.classList.remove("hidden");
+        typingEl.classList.add("flex");
+        scrollToBottom();
+
+        // GIẢ LẬP ĐỘ TRỄ CỦA AI (1.5 giây)
+        await new Promise((r) => setTimeout(r, 1500));
+
+        // LOGIC TÌM CÂU TRẢ LỜI (MATCHING)
+        const responseText = getMockResponse(text);
+
+        // Ẩn typing & Hiện tin nhắn Bot
+        typingEl.classList.add("hidden");
+        typingEl.classList.remove("flex");
+        appendMessage(responseText, "bot");
+      }
+
+      function getMockResponse(userInput) {
+        const lowerInput = userInput.toLowerCase();
+
+        // Duyệt qua "Bộ não" để tìm từ khóa
+        for (const item of BOT_BRAIN) {
+          // Nếu tìm thấy bất kỳ từ khóa nào trong câu nói của user
+          if (item.keywords.some((kw) => lowerInput.includes(kw))) {
+            return item.answer;
+          }
+        }
+
+        // Không tìm thấy -> Trả về câu mặc định
+        return FALLBACK_MSG;
+      }
+
+      // 4. XỬ LÝ TƯ VẤN (CŨNG GIẢ LẬP LUÔN)
+      window.handleAdvisorSubmit = async () => {
+        const inputVal = document.getElementById("advisor-input").value;
+        if (!inputVal.trim()) return;
+
+        document.getElementById("advisor-form").classList.add("hidden");
+        document.getElementById("advisor-loading").classList.remove("hidden");
+        document.getElementById("advisor-loading").classList.add("flex");
+
+        // Giả lập suy nghĩ 2 giây
+        await new Promise((r) => setTimeout(r, 2000));
+
+        // Kịch bản trả lời random cho phong phú
+        const advices = [
+          `Dựa trên chia sẻ: **"${inputVal}"**\n\n🌟 AI nhận thấy bạn rất hợp với **LUẬT KINH TẾ**!\nVì bạn có vẻ thích môi trường năng động, tư duy thực tế và cơ hội thu nhập cao.`,
+          `Wow, mô tả của bạn: **"${inputVal}"** cho thấy tố chất của một Luật sư tranh tụng!\n\n🌟 Bạn nên cân nhắc ngành **LUẬT HỌC (Luật chung)** nhé.\nNó sẽ trang bị nền tảng vững chắc nhất để bạn bay cao.`,
+          `Theo phân tích từ **"${inputVal}"**...\n\n🌟 **LUẬT QUỐC TẾ** đang vẫy gọi bạn!\nCó vẻ bạn thích sự hội nhập, ngoại ngữ và những vấn đề vĩ mô.`,
+        ];
+        const randomAdvice =
+          advices[Math.floor(Math.random() * advices.length)];
+
+        document.getElementById("advisor-content").innerText = randomAdvice; // Dùng innerHTML nếu muốn format đẹp
+
+        document.getElementById("advisor-loading").classList.add("hidden");
+        document.getElementById("advisor-loading").classList.remove("flex");
+        document.getElementById("advisor-result").classList.remove("hidden");
+      };
+
+      // 5. CÁC HÀM HỖ TRỢ HIỂN THỊ
+      function appendMessage(text, sender) {
+        const list = document.getElementById("messages-list");
+        const isBot = sender === "bot";
+        const time = new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+
+        const html = `
+                <div class="flex w-full ${
+                  isBot ? "justify-start" : "justify-end"
+                } animate-fade-in-up mb-6">
+                    <div class="flex max-w-[85%] md:max-w-[75%] ${
+                      isBot ? "flex-row" : "flex-row-reverse"
+                    }">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full flex items-center justify-center ${
+                          isBot
+                            ? "bg-gradient-to-br from-law-red to-law-dark text-white shadow-lg border-2 border-white"
+                            : "bg-gray-200 text-gray-600"
+                        } mx-2">
+                            <i data-lucide="${
+                              isBot ? "school" : "user"
+                            }" class="w-5 h-5"></i>
+                        </div>
+                        <div class="relative p-4 rounded-2xl shadow-sm text-sm leading-relaxed ${
+                          isBot
+                            ? "bg-white text-gray-800 border border-gray-200 rounded-tl-none"
+                            : "bg-law-red text-white rounded-tr-none"
+                        }">
+                            ${
+                              isBot
+                                ? '<div class="absolute -top-3 left-0 bg-gradient-to-r from-law-gold to-yellow-300 text-law-red text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm border border-white"><i data-lucide="sparkles" class="w-3 h-3"></i> AI Support</div>'
+                                : ""
+                            }
+                            <div class="whitespace-pre-wrap">${text}</div>
+                            <div class="text-[10px] mt-2 ${
+                              isBot ? "text-gray-400" : "text-red-200"
+                            } text-right font-medium">${time}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = html;
+        list.appendChild(tempDiv.firstElementChild);
+        lucide.createIcons();
+        scrollToBottom();
+      }
+
+      function scrollToBottom() {
+        const container = document.getElementById("chat-container");
+        container.scrollTop = container.scrollHeight;
+      }
+
+      // INIT KHI LOAD TRANG
+      document.addEventListener("DOMContentLoaded", () => {
+        lucide.createIcons();
+
+        // Set giờ hiện tại
+        const timeInitEl = document.getElementById("time-init");
+        if (timeInitEl)
+          timeInitEl.innerText = new Date().toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+
+        // Render Gợi ý Sidebar
+        const sidebarHTML = suggestions
+          .map(
+            (s) =>
+              `<button onclick="setInput('${s}');" class="w-full text-left p-3 rounded-lg bg-white/5 hover:bg-white/10 text-white/90 text-sm flex items-start gap-2 group transition-colors border border-transparent hover:border-law-gold/30"><i data-lucide="help-circle" class="w-4 h-4 mt-0.5 text-law-gold opacity-70 group-hover:opacity-100"></i>${s}</button>`
+          )
+          .join("");
+        const sidebarEl = document.getElementById("sidebar-suggestions");
+        if (sidebarEl) sidebarEl.innerHTML = sidebarHTML;
+
+        // Render Gợi ý Nhanh (Mobile/Desktop)
+        const quickHTML = suggestions
+          .slice(0, 3)
+          .map(
+            (s) =>
+              `<button onclick="setInput('${s}'); document.getElementById('btn-send').click();" class="whitespace-nowrap px-4 py-2 bg-white hover:bg-law-red hover:text-white text-gray-600 rounded-full text-xs font-medium transition-all border border-gray-200 shadow-sm">${s}</button>`
+          )
+          .join("");
+        const quickEl = document.getElementById("quick-suggestions");
+        if (quickEl) quickEl.innerHTML = quickHTML;
+
+        lucide.createIcons();
+      });
+    </script>
+  </body>
+</html>
