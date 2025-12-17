@@ -329,118 +329,205 @@
     <script>
       // 1. CƠ SỞ DỮ LIỆU CÂU TRẢ LỜI (KNOWLEDGE BASE)
       // Đây là não của con bot, ông muốn nó khôn hơn thì cứ thêm từ khóa vào đây
+      // 1. CƠ SỞ DỮ LIỆU CÂU TRẢ LỜI (KNOWLEDGE BASE)
       const BOT_BRAIN = [
-                {
-          "keywords": [
-            "ngành", "đào tạo", "có những ngành nào", "mã ngành"
-          ],
-          "answer": "🎓 **Các chương trình đào tạo tại HUL:**\n\n**1. Đại học chính quy:** \n- Ngành Luật (Mã: 7380101)\n- Ngành Luật Kinh tế (Mã: 7380107) \n\n**2. Trình độ Thạc sĩ:** \n- Ngành Luật (Mã: 8380101) \n- Ngành Luật Kinh tế (Mã: 8380107)\n- Ngành Lý luận và lịch sử nhà nước và pháp luật (Mã: 8380106) \n\n**3.Trình độ Tiến sĩ:** \n- Ngành Luật Kinh tế (Mã: 9380107) "
-        },
-
         {
-          "keywords": [
-            "phương thức", "xét tuyển", "cách thức", "nộp hồ sơ", "xét học bạ", "thi thpt"
+          keywords: [
+            "ngành",
+            "đào tạo",
+            "có những ngành nào",
+            "mã ngành",
+            "học gì",
           ],
-          "answer": "📋 **Các phương thức xét tuyển đại học chính quy tại HUL:** \n\n1️⃣ **Phương thức 1:** Xét tuyển thẳng, ưu tiên xét tuyển theo Quy chế hiện hành của Bộ GD&ĐT. \n2️⃣ **Phương thức 2:** Xét tuyển dựa vào kết quả học tập ở cấp THPT (xét học bạ). \n3️⃣ **Phương thức 3:** Xét tuyển dựa vào kết quả của Kỳ thi tốt nghiệp THPT hàng năm. [cite: 21]"
+          answer:
+            "🎓 **Các chương trình đào tạo tại HUL:**\n\n**1. Đại học chính quy:** \n- Ngành Luật (Mã: 7380101)\n- Ngành Luật Kinh tế (Mã: 7380107) \n\n**2. Trình độ Thạc sĩ:** \n- Ngành Luật (Mã: 8380101) \n- Ngành Luật Kinh tế (Mã: 8380107)\n- Ngành Lý luận và lịch sử nhà nước và pháp luật (Mã: 8380106) \n\n**3.Trình độ Tiến sĩ:** \n- Ngành Luật Kinh tế (Mã: 9380107)",
         },
-
         {
-          "keywords": [
-            "học bổng", "ưu đãi", "miễn giảm", "chế độ", "khuyến khích"
+          keywords: [
+            "địa chỉ",
+            "ở đâu",
+            "vị trí",
+            "đến trường",
+            "map",
+            "bản đồ",
           ],
-          "answer": "🎁 **Chính sách học bổng tuyển sinh hấp dẫn tại HUL:** \n\n- **Thủ khoa/Á khoa:** Thưởng 20 - 30 triệu đồng. \n- **Điểm thi THPT cao (≥26 điểm):** Học bổng tương đương học phí từ 10 - 20 triệu đồng. \n- **Xét tuyển thẳng (HSG Quốc gia/Quốc tế):** Học bổng toàn phần khóa học (dự kiến 70 triệu đồng). \n- **Thí sinh có điểm cộng:** Học bổng tương đương học phí kỳ 1 năm 3 (dự kiến 10 triệu đồng). \n\n⚠️ *Lưu ý: Thí sinh đạt nhiều mức thì chỉ nhận mức cao nhất.* "
+          answer:
+            "📍 **Trụ sở chính:** Số 20, Đường Võ Văn Kiệt, Phường An Cựu, TP. Huế.\n(Khu quy hoạch này rất rộng và thoáng mát nhé! 🌳)",
         },
-
         {
-          "keywords": [
-            "thủ khoa", "á khoa", "điểm cao nhất", "khen thưởng"
+          keywords: [
+            "học phí",
+            "tiền học",
+            "đắt không",
+            "chi phí",
+            "một tín bao nhiêu",
           ],
-          "answer": "🏆 **Khen thưởng dành cho Thủ khoa và Á khoa Trường:** \n\n- **Thủ khoa:** Thưởng 30.000.000 đồng. \n- **Á khoa:** Thưởng 20.000.000 đồng. \n\nℹ️ *Điều kiện:* Xét dựa trên điểm thi TN THPT (không tính điểm ưu tiên/điểm cộng). Nếu điểm ngang nhau sẽ xét học bạ trung bình lớp 12. "
+          answer:
+            "💰 **Về học phí:** Tính đến kỳ học gần nhất, mức học phí tại trường Đại học Luật - Đại học Huế là **530.000Đ/tín chỉ**.\nĐây là mức học phí rất cạnh tranh so với các trường Luật khác trên cả nước.",
         },
-
         {
-          "keywords": [
-            "tuyển thẳng", "học sinh giỏi quốc gia", "giải quốc gia", "olympic", "khoa học kỹ thuật"
+          keywords: [
+            "việc làm",
+            "ra trường",
+            "lương",
+            "nghề nghiệp",
+            "làm gì",
+            "cơ hội",
+            "tuyển dụng",
           ],
-          "answer": "🌟 **Học bổng dành cho thí sinh Xét tuyển thẳng:** \n\n- **Quyền lợi:** Cấp học bổng toàn phần khóa học (dự kiến 70.000.000 đồng). \n- **Đối tượng:**\n   + Thành viên đội tuyển Olympic quốc tế/Khoa học kỹ thuật quốc tế. \n   + Đạt giải Nhất, Nhì, Ba kỳ thi HSG Quốc gia các môn: Toán, Lý, Hóa, Văn, Sử, Địa, Tiếng Anh, Tiếng Pháp. \n   + Đạt giải Nhất, Nhì, Ba cuộc thi Khoa học kỹ thuật cấp quốc gia. "
+          answer:
+            "Yên tâm nhé! Cử nhân Luật HUL có cơ hội việc làm rất rộng mở: \n- Làm việc tại Tòa án, Viện kiểm sát 🏛️\n- Pháp chế doanh nghiệp 💼\n- Công chứng viên, Luật sư 👨‍⚖️\n- Giảng viên, Nghiên cứu viên 📚",
         },
-
         {
-          "keywords": [
-            "giới thiệu", "sứ mạng", "tầm nhìn", "mục tiêu", "định hướng"
+          keywords: [
+            "liên hệ",
+            "sđt",
+            "hotline",
+            "email",
+            "số điện thoại",
+            "web",
           ],
-          "answer": "🏛️ **Giới thiệu về Trường Đại học Luật, Đại học Huế:**\n\n**1. Sứ mạng:**\nĐào tạo đại học, sau đại học về pháp luật, nghiên cứu khoa học và cung cấp dịch vụ pháp lý chất lượng cao, phục vụ phát triển kinh tế - xã hội khu vực miền Trung, Tây Nguyên và cả nước.\n\n**2. Tầm nhìn đến năm 2030:**\nPhấn đấu trở thành trường đại học có uy tín trong nước và khu vực, lấy đào tạo pháp luật làm cốt lõi và từng bước hướng đến đại học định hướng nghiên cứu.\n\n**3. Mục tiêu tổng quát:**\nXây dựng trường vững mạnh toàn diện, chuẩn hóa đội ngũ và cơ sở vật chất, thực hiện tự chủ và nâng cao chất lượng giáo dục."
+          answer:
+            "📞 **Thông tin liên hệ:**\n- Hotline tuyển sinh: 0234.xxxx.xxx\n- Website: hul.hueuni.edu.vn\n- Fanpage: Đại học Luật Huế\n\nAdmin trực page 24/7 nhé! 😄",
         },
-
         {
-          "keywords": [
-            "giá trị cốt lõi", "slogan", "phương châm", "tinh thần"
-          ],
-          "answer": "💎 **Giá trị cốt lõi của HUL:**\n\n**TƯ DUY - SÁNG TẠO - TRÁCH NHIỆM** \n\n- **Tư duy:** Là nền tảng cho sự tự học, tìm tòi, khám phá và vận dụng kiến thức.\n- **Sáng tạo:** Vận dụng những vấn đề mới trong khoa học pháp lý vào thực tiễn cuộc sống một cách thiết thực .\n- **Trách nhiệm:** Sống vị tha, có trách nhiệm với bản thân, cộng đồng và xã hội, hướng tới sự công bằng."
+          keywords: ["xin chào", "hi", "hello", "chào", "bắt đầu", "alo"],
+          answer:
+            "Chào bạn! 👋 Tôi là Trợ lý ảo AI của Đại học Luật Huế.\nTôi có thể giúp bạn tra cứu thông tin tuyển sinh, ngành học... Bạn cần giúp gì nào? ^^",
         },
-
         {
-          "keywords": [
-            "lịch sử hình thành", "thành lập năm nào", "quá trình phát triển", "tiền thân"
+          keywords: [
+            "phương thức",
+            "xét tuyển",
+            "cách thức",
+            "nộp hồ sơ",
+            "xét học bạ",
+            "thi thpt",
+            "cách vào trường",
           ],
-          "answer": "📜 **Lịch sử hình thành Trường Đại học Luật, Đại học Huế:**\n\n- **Năm 1957:** Tiền thân là Luật Khoa thuộc Viện Đại học Huế .\n- **19/11/1990:** Thành lập Tổ Pháp lý (sau là Bộ môn Pháp lý) thuộc Trường ĐH Tổng hợp Huế.\n- **26/01/2000:** Nâng cấp thành Khoa Luật thuộc Trường Đại học Khoa học.\n- **19/08/2009:** Tách ra thành Khoa Luật trực thuộc Đại học Huế.\n- **03/03/2015:** Thủ tướng Chính phủ ban hành Quyết định số 274/QĐ-TTg chính thức thành lập Trường Đại học Luật thuộc Đại học Huế."
+          answer:
+            "📋 **Các phương thức xét tuyển đại học chính quy tại HUL:** \n\n1️⃣ **Phương thức 1:** Xét tuyển thẳng, ưu tiên xét tuyển theo Quy chế hiện hành. \n2️⃣ **Phương thức 2:** Xét tuyển dựa vào kết quả học tập ở cấp THPT (xét học bạ). \n3️⃣ **Phương thức 3:** Xét tuyển dựa vào kết quả của Kỳ thi tốt nghiệp THPT hàng năm.",
         },
-
         {
-          "keywords": [
-            "cơ cấu", "tổ chức", "khoa phòng", "cam kết"
+          keywords: [
+            "học bổng",
+            "ưu đãi",
+            "miễn giảm",
+            "chế độ",
+            "khuyến khích",
+            "tiền thưởng",
           ],
-          "answer": "🏢 **Cơ cấu và Cam kết chất lượng:**\n\n**1.Cơ cấu tổ chức:**\nHệ thống hiện có 06 phòng chức năng, 05 khoa trực thuộc và 03 trung tâm.\n\n**2. Cam kết của Nhà trường:**\n- Phấn đấu trở thành trường đại học uy tín tại Việt Nam.\n- Cải cách thủ tục hành chính công khai, minh bạch.\n- Rèn luyện người học có tri thức, kỹ năng, đạo đức, đáp ứng yêu cầu xây dựng Nhà nước pháp quyền."
+          answer:
+            "🎁 **Chính sách học bổng tuyển sinh hấp dẫn tại HUL:** \n\n- **Thủ khoa/Á khoa:** Thưởng 20 - 30 triệu đồng. \n- **Điểm thi THPT cao (≥26 điểm):** Học bổng 10 - 20 triệu đồng. \n- **Xét tuyển thẳng (HSG Quốc gia):** Học bổng toàn phần khóa học (~70 triệu đồng). \n- **Thí sinh có điểm cộng:** Học bổng ~10 triệu đồng. \n\n⚠️ *Lưu ý: Thí sinh đạt nhiều mức thì chỉ nhận mức cao nhất.*",
         },
-
         {
-          "keywords": [
-            "điểm chuẩn 2025", "điểm trúng tuyển 2025", "năm nay lấy bao nhiêu", "điểm sàn 2025"
-          ],
-          "answer": "🔥 **Điểm chuẩn trúng tuyển năm 2025:**\n\n1️⃣ **Xét tuyển học bạ THPT (Đợt 1):**\n- Ngành Luật: 23.5 điểm\n- Ngành Luật Kinh tế: 23.5 điểm\n\n2️⃣ **Xét tuyển điểm thi TN THPT (Đợt 1):**\n- Ngành Luật: 22.0 điểm\n- Ngành Luật Kinh tế: 22.0 điểm\n\n"
+          keywords: ["thủ khoa", "á khoa", "điểm cao nhất", "khen thưởng"],
+          answer:
+            "🏆 **Khen thưởng dành cho Thủ khoa và Á khoa:** \n\n- **Thủ khoa:** Thưởng 30.000.000 đồng. \n- **Á khoa:** Thưởng 20.000.000 đồng. \n\nℹ️ *Điều kiện:* Xét dựa trên điểm thi TN THPT (không tính điểm ưu tiên).",
         },
-
         {
-          "keywords": [
-            "điểm chuẩn 2024", "điểm năm ngoái", "2024 lấy bao nhiêu"
+          keywords: [
+            "tuyển thẳng",
+            "học sinh giỏi quốc gia",
+            "giải quốc gia",
+            "olympic",
+            "khoa học kỹ thuật",
           ],
-          "answer": "📊 **Điểm chuẩn trúng tuyển năm 2024:**\n\n🔹 **Xét tuyển đợt 1 (Học bạ):**\n- Cả 2 ngành Luật & Luật Kinh tế: 21.0 điểm\n\n🔹 **Xét điểm thi TN THPT:**\n- Cả 2 ngành Luật & Luật Kinh tế: 21.0 điểm\n\n"
+          answer:
+            "🌟 **Học bổng dành cho thí sinh Xét tuyển thẳng:** \n\n- **Quyền lợi:** Cấp học bổng toàn phần khóa học (dự kiến 70.000.000 đồng). \n- **Đối tượng:**\n   + Thành viên đội tuyển Olympic quốc tế.\n   + Đạt giải Nhất, Nhì, Ba kỳ thi HSG Quốc gia.\n   + Đạt giải KHKT cấp quốc gia.",
         },
-
         {
-          "keywords": [
-            "điểm chuẩn các năm", "lịch sử điểm chuẩn", "2021", "2022", "2023", "thống kê điểm"
+          keywords: [
+            "giới thiệu",
+            "sứ mạng",
+            "tầm nhìn",
+            "mục tiêu",
+            "định hướng",
+            "về trường",
           ],
-          "answer": "📈 **Thống kê điểm chuẩn các năm gần đây (Luật & Luật Kinh tế):**\n\n**Năm 2023:**\n- Học bạ: 19.0\n- Thi THPT: 19.0\n\n**Năm 2022:**\n- Học bạ: 20.0\n- Thi THPT: 19.0\n\n**Năm 2021:**\n- Học bạ: 20.0\n- Thi THPT: 18.5\n\n"
+          answer:
+            "🏛️ **Giới thiệu về HUL:**\n\n**1. Sứ mạng:** Đào tạo nhân lực pháp luật, NCKH và cung cấp dịch vụ pháp lý chất lượng cao.\n\n**2. Tầm nhìn 2030:** Trở thành trường đại học uy tín trong khu vực, định hướng nghiên cứu.\n\n**3. Mục tiêu:** Xây dựng trường vững mạnh toàn diện, thực hiện tự chủ.",
         },
-
         {
-          "keywords": [
-            "điểm chuẩn 2017", "điểm chuẩn 2018", "điểm chuẩn 2019", "điểm chuẩn 2020"
-          ],
-          "answer": "🗄️ **Dữ liệu điểm chuẩn giai đoạn 2017 - 2020:**\n\n- **2020:** Xét học bạ (20.0 - 21.0), Xét thi THPT (16.25 - 17.5).\n- **2019:** Mức điểm khoảng 15.5 - 15.75.\n- **2018:** Mức điểm khoảng 16.0 - 17.75.\n- **2017:** Mức điểm cao từ 22.25 - 24.0.\n\n"
+          keywords: ["giá trị cốt lõi", "slogan", "phương châm", "tinh thần"],
+          answer:
+            "💎 **Giá trị cốt lõi của HUL:**\n\n👉 **TƯ DUY - SÁNG TẠO - TRÁCH NHIỆM** \n\n- **Tư duy:** Nền tảng tự học.\n- **Sáng tạo:** Vận dụng vào thực tiễn.\n- **Trách nhiệm:** Với bản thân và xã hội.",
         },
-
         {
-          "keywords": [
-            "cơ cấu tổ chức", "phòng ban", "khoa trực thuộc", "số lượng giảng viên", "đội ngũ", "tiến sĩ", "giáo sư"
+          keywords: [
+            "lịch sử hình thành",
+            "thành lập năm nào",
+            "quá trình phát triển",
+            "tiền thân",
+            "lịch sử",
           ],
-          "answer": "🏢 **Cơ cấu tổ chức & Đội ngũ cán bộ HUL:**\n\n**1. Cơ cấu tổ chức:**\n- 05 Khoa trực thuộc (Luật Kinh tế, Luật Hành chính, Luật Dân sự, Luật Hình sự, Luật Quốc tế).\n- 06 Phòng chức năng.\n- 03 Trung tâm[cite: 167].\n\n**2. Đội ngũ cán bộ (Tổng 161 người):**\n- 03 Phó Giáo sư.\n- 26 Tiến sĩ.\n- 03 Giảng viên cao cấp & 26 Giảng viên chính.\n- 35 Giảng viên đang làm nghiên cứu sinh trong và ngoài nước.\n\n"
-        }
-
+          answer:
+            "📜 **Lịch sử hình thành HUL:**\n\n- **1957:** Tiền thân là Luật Khoa (Viện ĐH Huế).\n- **1990:** Thành lập Tổ Pháp lý (ĐH Tổng hợp).\n- **2009:** Tách thành Khoa Luật trực thuộc ĐH Huế.\n- **03/03/2015:** Chính thức thành lập Trường Đại học Luật thuộc Đại học Huế.",
+        },
+        {
+          keywords: ["cơ cấu", "tổ chức", "khoa phòng", "cam kết", "bộ máy"],
+          answer:
+            "🏢 **Cơ cấu tổ chức:**\nHiện có 06 phòng chức năng, 05 khoa trực thuộc và 03 trung tâm.\n\n**Cam kết:** Phấn đấu trở thành trường đại học uy tín, cải cách hành chính và rèn luyện người học toàn diện.",
+        },
+        {
+          keywords: [
+            "điểm chuẩn 2025",
+            "điểm trúng tuyển 2025",
+            "năm nay lấy bao nhiêu",
+            "điểm sàn 2025",
+            "điểm 2025",
+          ],
+          answer:
+            "🔥 **Điểm chuẩn trúng tuyển năm 2025 (Dự kiến/Tham khảo):**\n\n1️⃣ **Xét học bạ (Đợt 1):**\n- Luật: 23.5\n- Luật Kinh tế: 23.5\n\n2️⃣ **Xét thi TN THPT:**\n- Luật: 22.0\n- Luật Kinh tế: 22.0",
+        },
+        {
+          keywords: [
+            "điểm chuẩn 2024",
+            "điểm năm ngoái",
+            "2024 lấy bao nhiêu",
+            "điểm 2024",
+          ],
+          answer:
+            "📊 **Điểm chuẩn năm 2024:**\n\n🔹 **Xét học bạ:** Cả 2 ngành đều 21.0\n🔹 **Xét thi THPT:** Cả 2 ngành đều 21.0",
+        },
+        {
+          keywords: [
+            "điểm chuẩn các năm",
+            "lịch sử điểm chuẩn",
+            "2021",
+            "2022",
+            "2023",
+            "thống kê điểm",
+          ],
+          answer:
+            "📈 **Thống kê điểm chuẩn các năm (Luật & Luật Kinh tế):**\n\n- **2023:** 19.0 (Học bạ & Thi)\n- **2022:** 20.0 (Học bạ) - 19.0 (Thi)\n- **2021:** 20.0 (Học bạ) - 18.5 (Thi)",
+        },
+        {
+          keywords: [
+            "đội ngũ",
+            "giảng viên",
+            "thầy cô",
+            "nhân sự",
+            "giáo sư",
+            "tiến sĩ",
+          ],
+          answer:
+            "👩‍🏫 **Đội ngũ cán bộ HUL (Tổng 161 người):**\n\n- 03 Phó Giáo sư.\n- 26 Tiến sĩ.\n- 29 Giảng viên cao cấp & Giảng viên chính.\n- 35 Giảng viên đang làm Nghiên cứu sinh.\nĐội ngũ cực kỳ xịn sò và tâm huyết! ❤️",
+        },
       ];
 
-      // Câu trả lời mặc định khi không hiểu
+      // Câu trả lời mặc định
       const FALLBACK_MSG =
         "Xin lỗi, hiện tại tôi đang chạy ở chế độ thử nghiệm nên chưa thể trả lời câu hỏi phức tạp này. 😅\n\n👉 **Bạn vui lòng chọn các câu hỏi gợi ý có sẵn bên dưới/bên trái để tôi phục vụ tốt nhất nhé!**";
 
-      // Danh sách gợi ý hiển thị
+      // Danh sách câu hỏi gợi ý (Đã cập nhật phong phú hơn)
       const suggestions = [
         "HUL có những ngành nào?",
+        "Điểm chuẩn năm 2024?",
+        "Học phí một tín bao nhiêu?",
+        "Chính sách học bổng",
         "Học Luật ra làm gì?",
-        "Địa chỉ trường ở đâu?",
-        "Học phí thế nào?",
-        "Liên hệ với trường",
+        "Xét tuyển bằng học bạ được không?",
       ];
 
       // 2. CÁC HÀM XỬ LÝ UI (GIỮ NGUYÊN)
@@ -496,12 +583,14 @@
       }
 
       function getMockResponse(userInput) {
-        const lowerInput = userInput.toLowerCase();
+        const lowerInput = userInput.toLowerCase().trim();
 
         // Duyệt qua "Bộ não" để tìm từ khóa
         for (const item of BOT_BRAIN) {
           // Nếu tìm thấy bất kỳ từ khóa nào trong câu nói của user
-          if (item.keywords.some((kw) => lowerInput.includes(kw))) {
+          if (
+            item.keywords.some((kw) => lowerInput.includes(kw.toLowerCase()))
+          ) {
             return item.answer;
           }
         }
